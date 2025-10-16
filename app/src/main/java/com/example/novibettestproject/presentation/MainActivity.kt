@@ -16,7 +16,6 @@ import com.example.novibettestproject.presentation.adapter.Item
 import com.example.novibettestproject.presentation.adapter.MainAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
