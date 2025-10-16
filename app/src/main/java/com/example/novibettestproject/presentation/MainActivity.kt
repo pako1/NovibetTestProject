@@ -15,6 +15,7 @@ import com.example.novibettestproject.presentation.adapter.HeadlineItem
 import com.example.novibettestproject.presentation.adapter.Item
 import com.example.novibettestproject.presentation.adapter.MainAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainAdapter: MainAdapter
+    private var autoScrollJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +78,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startAutoScroll() {
-        lifecycleScope.launch {
+        autoScrollJob?.cancel()
+        autoScrollJob = lifecycleScope.launch {
             while (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                 delay(SWIPE_INTERVAL)
                 val headlineHolder = binding.recycler
