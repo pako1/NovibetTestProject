@@ -31,6 +31,12 @@ object GamesMapper {
     private fun eventDTOToDomain(eventDTO: EventDTO): Game = Game(
         homeTeam = eventDTO.additionalCaptions.homeTeam,
         awayTeam = eventDTO.additionalCaptions.awayTeam,
-        elapsedTime = eventDTO.liveData.elapsedTime
+        elapsedTime = eventDTO.liveData.elapsedTime.toReadableFormat()
     )
+
+    private fun String.toReadableFormat(): String {
+        if (this.startsWith("-")) return "00:00:00"
+        return this.split(".").first()
+    }
+
 }

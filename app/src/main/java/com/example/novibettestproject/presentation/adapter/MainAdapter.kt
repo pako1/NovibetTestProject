@@ -45,7 +45,7 @@ class MainAdapter : ListAdapter<Item, ViewHolder>(GamesDiffUtilCallback) {
         fun bind(game: Item.Game) = with(itemGameBinding) {
             homeTeam.text = game.homeTeam
             awayTeam.text = game.awayTeam
-            elapsedTime.text = game.elapsedTime
+            elapsedTime.text = game.elapsedTime.toString()
         }
     }
 
