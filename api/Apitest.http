@@ -1,0 +1,16 @@
+package com.example.novibettestproject
+
+### Request for access token
+GET https://raw.githubusercontent.com/kfiliosNovibet/NoviTest/refs/heads/main/token
+
+### Request for live games
+GET https://raw.githubusercontent.com/kfiliosNovibet/NoviTest/refs/heads/main/livegames
+
+### Request for headlines
+GET https://raw.githubusercontent.com/kfiliosNovibet/NoviTest/refs/heads/main/headlines
+
+### Request for updated games
+GET https://raw.githubusercontent.com/kfiliosNovibet/NoviTest/refs/heads/main/updatedlivegames
+
+### Request for updated headlines
+GET https://raw.githubusercontent.com/kfiliosNovibet/NoviTest/refs/heads/main/updatedheadlines
