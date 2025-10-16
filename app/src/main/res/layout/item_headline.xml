@@ -3,37 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:background="@color/black">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/homeTeam"
-        style="@style/Headline.CompetitorCaption"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHeadlines"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Arsenal" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/awayTeam"
-        style="@style/Headline.CompetitorCaption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/homeTeam"
-        tools:text="FC Köln" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/startTime"
-        style="@style/Headline.StartTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/awayTeam"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/homeTeam"
-        tools:text="22:00" />
-
+        tools:itemCount="3"
+        tools:listitem="@layout/item_single_headline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,10 @@
 package com.example.novibettestproject.domain.repositories
 
-import com.example.novibettestproject.domain.models.Games
+import com.example.novibettestproject.domain.models.Game
 import kotlinx.coroutines.flow.Flow
 
 interface GamesRepository {
-    suspend fun getGames(): Games
-    suspend fun getUpdatedLiveGames(): Flow<Games>
+
+    suspend fun getGames(): List<Game>
+    suspend fun getUpdatedLiveGames(): Flow<List<Game>>
 }

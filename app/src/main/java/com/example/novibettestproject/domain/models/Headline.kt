@@ -1,7 +1,7 @@
 package com.example.novibettestproject.domain.models
 
-data class Games(
+data class Headline(
     val homeTeam: String,
     val awayTeam: String,
-    val elapsedTime: String
+    val startTime: String
 )

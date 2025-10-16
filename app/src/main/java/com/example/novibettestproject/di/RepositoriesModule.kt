@@ -1,6 +1,7 @@
 package com.example.novibettestproject.di
 
 import com.example.novibettestproject.data.remote.api.NovibetApi
+import com.example.novibettestproject.data.remote.api.TokenProvider
 import com.example.novibettestproject.data.repositories.AuthenticationRepositoryImpl
 import com.example.novibettestproject.data.repositories.GamesRepositoryImpl
 import com.example.novibettestproject.data.repositories.HeadlinesRepositoryImpl
@@ -29,6 +30,11 @@ object RepositoriesModule {
 
     @Provides
     @Singleton
-    fun provideAuthenticationRepository(novibetApi: NovibetApi): AuthenticationRepository =
-        AuthenticationRepositoryImpl(novibetApi = novibetApi)
+    fun provideAuthenticationRepository(
+        novibetApi: NovibetApi,
+        tokenProvider: TokenProvider
+    ): AuthenticationRepository = AuthenticationRepositoryImpl(
+        novibetApi = novibetApi,
+        tokenProvider = tokenProvider
+    )
 }

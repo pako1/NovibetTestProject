@@ -8,34 +8,38 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/homeTeam"
-        style="@style/Game.CompetitorCaption"
+        style="@style/Headline.CompetitorCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="PS TIRA" />
+        tools:text="Arsenal" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/awayTeam"
-        style="@style/Game.CompetitorCaption"
+        style="@style/Headline.CompetitorCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/homeTeam"
-        tools:text="Persepar Kalteng Putra" />
+        tools:text="FC Köln" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/elapsedTime"
-        style="@style/Game.ElapsedTime"
+        android:id="@+id/startTime"
+        style="@style/Headline.StartTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/awayTeam"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/homeTeam"
-        app:layout_constraintVertical_bias="1"
-        tools:text="06:30" />
+        tools:text="22:00" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,13 @@
 package com.example.novibettestproject
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class NovibetApplication : Application()
+class NovibetApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
+    }
+}

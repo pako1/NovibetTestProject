@@ -8,18 +8,18 @@ import retrofit2.http.GET
 
 interface NovibetApi {
 
-    @GET()
+    @GET(TOKEN)
     suspend fun getAccessToken(): Token
 
-    @GET()
-    suspend fun getLiveGames(): GamesDTO
+    @GET(LIVE_GAMES)
+    suspend fun getLiveGames(): List<GamesDTO>
 
-    @GET()
-    suspend fun getHeadlines(): HeadlinesDTO
+    @GET(UPDATED_LIVE_GAMES)
+    suspend fun getUpdatedLiveGames(): Flow<List<GamesDTO>>
 
-    @GET()
-    suspend fun getUpdatedLiveGames(): Flow<GamesDTO>
+    @GET(HEADLINES)
+    suspend fun getHeadlines(): List<HeadlinesDTO>
 
-    @GET()
+    @GET(UPDATED_HEADLINES)
     suspend fun getUpdatedHeadlines(): Flow<HeadlinesDTO>
 }
