@@ -15,6 +15,7 @@ import com.example.novibettestproject.presentation.adapter.HeadlineItem
 import com.example.novibettestproject.presentation.adapter.Item
 import com.example.novibettestproject.presentation.adapter.MainAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         observe()
         mainViewModel.getHeadlines()
         mainViewModel.getGames()
+        mainViewModel.updateHeadlines()
+        mainViewModel.updateGames()
     }
 
     private fun observe() {
@@ -60,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             games?.let { addAll(it) }
         }
         mainAdapter.submitList(items.filterNotNull())
+        if (headlines.isNullOrEmpty()) return
+        startAutoScroll()
     }
 
     private fun applyWindowInsets() {
@@ -70,8 +75,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun startAutoScroll() {
+        lifecycleScope.launch {
+            while (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                delay(SWIPE_INTERVAL)
+                val headlineHolder = binding.recycler
+                    .findViewHolderForAdapterPosition(0) as? MainAdapter.HeadlineViewHolder
+                headlineHolder?.scrollNext()
+            }
+        }
+    }
+
     private fun initMainAdapter() = with(binding.recycler) {
         mainAdapter = MainAdapter()
         adapter = mainAdapter
+    }
+
+    private companion object {
+        const val SWIPE_INTERVAL = 5000L
     }
 }

@@ -4,8 +4,6 @@ import com.example.novibettestproject.data.mappers.HeadlinesMapper
 import com.example.novibettestproject.data.remote.api.NovibetApi
 import com.example.novibettestproject.domain.models.Headline
 import com.example.novibettestproject.domain.repositories.HeadlinesRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class HeadlinesRepositoryImpl @Inject constructor(
@@ -20,7 +18,7 @@ class HeadlinesRepositoryImpl @Inject constructor(
         return headlines
     }
 
-    override suspend fun getUpdatedHeadlines(): Flow<List<Headline>> = novibetApi
+    override suspend fun getUpdatedHeadlines(): List<Headline> = novibetApi
         .getUpdatedHeadlines()
-        .map { headlinesDTO -> HeadlinesMapper.mapToDomain(headlinesDTO) }
+        .flatMap { headlinesDTO -> HeadlinesMapper.mapToDomain(headlinesDTO) }
 }

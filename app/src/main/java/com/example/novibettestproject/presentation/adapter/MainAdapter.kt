@@ -4,20 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewbinding.ViewBinding
 import com.example.novibettestproject.databinding.ItemGameBinding
 import com.example.novibettestproject.databinding.ItemHeadlineBinding
 import com.example.novibettestproject.presentation.adapter.headlines.HeadlinesAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainAdapter : ListAdapter<Item, ViewHolder>(GamesDiffUtilCallback) {
-
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is Item.Game -> ViewType.Game.ordinal
@@ -58,7 +51,7 @@ class MainAdapter : ListAdapter<Item, ViewHolder>(GamesDiffUtilCallback) {
         }
     }
 
-    private class HeadlineViewHolder(private val binding: ItemHeadlineBinding) :
+    class HeadlineViewHolder(private val binding: ItemHeadlineBinding) :
         ViewHolder(binding.root) {
 
         private val adapter = HeadlinesAdapter()
@@ -67,34 +60,19 @@ class MainAdapter : ListAdapter<Item, ViewHolder>(GamesDiffUtilCallback) {
             binding.recyclerViewHeadlines.adapter = adapter
         }
 
-        private var autoScrollJob: Job? = null
+        fun scrollNext() = with(binding.recyclerViewHeadlines) {
+            val layoutManager = layoutManager as? LinearLayoutManager ?: return@with
+            val itemCount = adapter?.itemCount ?: return@with
+            val currentPosition = layoutManager.findFirstVisibleItemPosition()
+            val nextPosition = currentPosition + 1
 
-        private fun RecyclerView.startAutoScroll() {
-            autoScrollJob?.cancel()
-            val layoutManager = layoutManager as? LinearLayoutManager ?: return
-
-            autoScrollJob = CoroutineScope(Dispatchers.Main).launch {
-                val adapterItemCount = adapter?.itemCount ?: return@launch
-
-                while (true) {
-                    // get the current first visible position on each iteration
-                    val positionIndex = layoutManager.findFirstVisibleItemPosition()
-                    if (positionIndex < 0 || positionIndex >= adapterItemCount) break
-                    // stop if we reach the last item
-                    if (positionIndex + 1 >= adapterItemCount - 1) break
-
-                    smoothScrollToPosition(positionIndex + 1)
-                    delay(5000)
-                }
+            if (nextPosition < itemCount) {
+                smoothScrollToPosition(nextPosition)
             }
         }
 
-        fun bind(headline: Item.Headline) {
-            adapter.submitList(headline.headlines)
-            binding.recyclerViewHeadlines.startAutoScroll()
-        }
+        fun bind(headline: Item.Headline) = adapter.submitList(headline.headlines)
     }
-
 
     private enum class ViewType {
         Game,

@@ -4,8 +4,6 @@ import com.example.novibettestproject.data.mappers.GamesMapper
 import com.example.novibettestproject.data.remote.api.NovibetApi
 import com.example.novibettestproject.domain.models.Game
 import com.example.novibettestproject.domain.repositories.GamesRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GamesRepositoryImpl @Inject constructor(
@@ -22,7 +20,7 @@ class GamesRepositoryImpl @Inject constructor(
         return games
     }
 
-    override suspend fun getUpdatedLiveGames(): Flow<List<Game>> = novibetApi
+    override suspend fun getUpdatedLiveGames(): List<Game> = novibetApi
         .getUpdatedLiveGames()
-        .map { gamesDTO -> GamesMapper.wrapperToDomain(gamesDTO) }
+        .let { gamesDTO -> GamesMapper.wrapperToDomain(gamesDTO) }
 }
